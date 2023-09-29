@@ -99,8 +99,21 @@ def findMaxDNCWithComps(a, i, j) -> tuple[int, list[int]]:
         return (right_max, comp_lst)
 
 
-# Example usage:
 x = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
 result, compared_indexes = findMaxDNCWithComps(x, 0, len(x) - 1)
 print("Largest value:", result)
 print("Indexes compared with largest:", compared_indexes)
+
+
+def findSecondDNC(a):
+    right, complst = findMaxDNCWithComps(a, 0, len(a) - 1)
+
+    second_largest = complst[0]
+    for item in complst:
+        if item > second_largest:
+            second_largest = item
+    return second_largest
+
+
+x = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+print(findSecondDNC(x))

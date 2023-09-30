@@ -70,11 +70,11 @@ def findSecondLinearWithCount(a):
     second_largest, max_comparisons = findMaxLinearWithCount(largest_element_comparisons)
     return second_largest, comparisons + max_comparisons
 
-
-x = [1, 2, 7, 2, 5, 3]
-second_largest, comparisons = findSecondLinearWithCount(x)
-print("Second largest value:", second_largest)
-print("Number of comparisons:", comparisons)
+#
+# x = [1, 2, 7, 2, 5, 3]
+# second_largest, comparisons = findSecondLinearWithCount(x)
+# print("Second largest value:", second_largest)
+# print("Number of comparisons:", comparisons)
 
 
 def findMaxDNCWithComps(a, i, j) -> tuple[int, list[int]]:
@@ -84,22 +84,21 @@ def findMaxDNCWithComps(a, i, j) -> tuple[int, list[int]]:
     if i == j:
         return (a[i], [])
 
-
-    middle = (i + j) // 2
+    middle = floor((i + j) / 2)
     left_max, left_comp = findMaxDNCWithComps(a, i, middle)
     right_max, right_comp = findMaxDNCWithComps(a, middle + 1, j)
 
     if left_max > right_max:
         comp_lst += left_comp
-        comp_lst.append(middle + 1)
+        comp_lst.append(right_max)
         return (left_max, comp_lst)
     else:
         comp_lst += right_comp
-        comp_lst.append(middle)
+        comp_lst.append(left_max)
         return (right_max, comp_lst)
 
 
-x = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+x = [7, 12, 2, 5, 10]
 result, compared_indexes = findMaxDNCWithComps(x, 0, len(x) - 1)
 print("Largest value:", result)
 print("Indexes compared with largest:", compared_indexes)
@@ -107,13 +106,21 @@ print("Indexes compared with largest:", compared_indexes)
 
 def findSecondDNC(a):
     right, complst = findMaxDNCWithComps(a, 0, len(a) - 1)
-
-    second_largest = complst[0]
-    for item in complst:
-        if item > second_largest:
-            second_largest = item
+    second_largest = findMaxLinear(complst)
     return second_largest
 
 
-x = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
-print(findSecondDNC(x))
+# x = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+# print(findSecondDNC(x))
+
+
+def findSecondDNCWithCount(a):
+    largest, complst = findMaxDNCWithComps(a, 0, len(a) - 1)
+    print(largest, complst)
+    cnt = len(a) - 1
+    second_largest, cnt2 = findMaxLinearWithCount(complst)
+    total = cnt + cnt2
+    return second_largest, total
+
+x = [7, 12, 2, 5, 10]
+print(findSecondDNCWithCount(x))

@@ -1,10 +1,11 @@
 import unittest
 import numpy as np
-from FindMax import findMaxLinear, findMaxLinearWithCount, findMaxDNC, findMaxDNCWithCount, findSecondLinear
+from FindMax import findMaxLinear, findMaxLinearWithCount, findMaxDNC, findMaxDNCWithCount, findSecondLinear, findSecondLinearWithCount, findMaxDNCWithComps, findSecondDNC
 
 class MaxTest(unittest.TestCase):
   def setUp(self):
     self.short_list = np.array([7, 1, 2, 3, 4, 5, 10])
+    self.short_list2 = np.array([7, 12, 2, 5, 10])
     l = np.random.randint(1, 100)
     self.random_list = np.random.randint(1, 100, l)
 
@@ -43,6 +44,27 @@ class MaxTest(unittest.TestCase):
   def test_findSecondLinear_02(self):
     self.assertEqual(findSecondLinear(self.short_list[:-1]), 5)
 
+  def test_findSecondLinearWithCount_01(self):
+    self.assertEqual(findSecondLinearWithCount(self.short_list), (7, 6))
+
+  def test_findSecondLinearWithCount_02(self):
+    self.assertEqual(findSecondLinearWithCount(self.short_list2), (10, 7))
+
+  def test_findSecondDNC_01(self):
+    self.assertEqual(findSecondDNC(self.short_list), 7)
+
+  def test_findSecondDNC_02(self):
+    self.assertEqual(findSecondDNC(self.short_list2), 10)
+
+  def test_findMaxDNCWithComps_01(self):
+    actual = (10, [7])
+    result = findMaxDNCWithComps(self.short_list, 0, len(self.short_list) - 1)
+    self.assertSequenceEqual(actual, result)
+
+  def test_findMaxDNCWithComps_02(self):
+    actual = (10, [7])
+    result = findMaxDNCWithComps(self.short_list, 0, len(self.short_list) - 1)
+    self.assertSequenceEqual(actual, result)
 
 if __name__ == '__main__':
     unittest.main()

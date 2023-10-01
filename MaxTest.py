@@ -57,14 +57,16 @@ class MaxTest(unittest.TestCase):
     self.assertEqual(findSecondDNC(self.short_list2), 10)
 
   def test_findMaxDNCWithComps_01(self):
-    actual = (10, [7])
+    actual = (10, [5, 7])
     result = findMaxDNCWithComps(self.short_list, 0, len(self.short_list) - 1)
-    self.assertSequenceEqual(actual, result)
+    self.assertEqual(actual[0], result[0])
+    self.assertListEqual(actual[1], result[1])
 
   def test_findMaxDNCWithComps_02(self):
-    actual = (10, [7])
-    result = findMaxDNCWithComps(self.short_list, 0, len(self.short_list) - 1)
-    self.assertSequenceEqual(actual, result)
+    actual = (12, [7, 2, 10])
+    result = findMaxDNCWithComps(self.short_list2, 0, len(self.short_list2) - 1)
+    self.assertEqual(actual[0], result[0])
+    self.assertListEqual(actual[1], result[1])
 
 if __name__ == '__main__':
     unittest.main()

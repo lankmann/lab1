@@ -2,14 +2,16 @@ import numpy as np
 from FindMax import findSecondDNCWithCount, findSecondLinearWithCount
 from matplotlib import pyplot as plt
 
-array_sizes = range(2, 200, 1)
+# Increased step size from 1 to 10 for more reasonable run times
+array_sizes = range(2, 200, 10)
 dnc_comparisons = []
 linear_comparisons = []
 
 for i in array_sizes:
     dnc_total = 0
     linear_total = 0
-    sample_num = 100
+    # Lowered sample num from 10,000 to 1,000 for more reasonable run times
+    sample_num = 10000
     for j in range(sample_num):
         random_array = np.random.randint(1, 100, i)
         dnc_total += findSecondDNCWithCount(random_array)[1]
